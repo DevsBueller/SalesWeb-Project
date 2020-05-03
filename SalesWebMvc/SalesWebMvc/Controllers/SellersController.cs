@@ -38,7 +38,7 @@ namespace SalesWebMvc.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				var departments = await  _departmentService.FindAllAsync();
+				var departments = await _departmentService.FindAllAsync();
 				var viewmodel = new SellerFormViewModel { Seller = seller, Departments = departments };
 				return View(viewmodel);
 			}
@@ -50,7 +50,7 @@ namespace SalesWebMvc.Controllers
 
 			if (id == null)
 			{
-				return RedirectToAction(nameof(Error), new { message = "Id not provided"});
+				return RedirectToAction(nameof(Error), new { message = "Id not provided" });
 			}
 			var obj = await _sellerService.FindByIdAsync(id.Value);
 			if (obj == null)
@@ -63,10 +63,18 @@ namespace SalesWebMvc.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Delete(int id)
 		{
+			try
+			{
+				await _sellerService.RemoveAsync(id);
+				return RedirectToAction(nameof(Index));
+			
+			}
+			catch (IntegrityException e)
+			{
+				return RedirectToAction(nameof(Error), new { message = "Can't delete seller because he/she has sales" });
 
-			await _sellerService.RemoveAsync(id);
-			return RedirectToAction(nameof(Index));
-		}
+			}
+}
 		public async Task<IActionResult> Details(int? id)
 		{
 

@@ -41,14 +41,14 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.BaseSalary);
 				</td>
-				<td class="btn success btn-hover" width="70px" style="margin:2px; ">
+				<td class="btn success" width="70px" style="margin:2px; ">
 					<a style="text-decoration:none;" asp-action="Edit" asp-route-Id="@item.Id">Edit</a>
 				</td>
-				<td class="btn success btn-hover" width="70px" style="margin:2px; text-decoration:none;">
-				<a style="text-decoration:none;" asp-action="Details" asp-route-Id="@item.Id">Detais</a>
+				<td class="btn success " width="70px" style="margin:2px;">
+					<a style="text-decoration:none;" asp-action="Details" asp-route-Id="@item.Id">Detais</a>
 				</td>
-				<td class="btn danger btn-hover" width="70px" style="margin:2px; text-decoration:none;">
-				<a style="text-decoration:none;" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
+				<td class="btn danger" width="70px" style="margin:2px;">
+					<a style="text-decoration:none;" asp-action="Delete" asp-route-Id="@item.Id">Delete</a>
 				</td>
 
 			</tr>
